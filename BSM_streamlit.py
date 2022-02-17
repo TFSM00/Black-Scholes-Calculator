@@ -172,35 +172,44 @@ elif variable == risk_free_var:
         vegas.append(optionVega(S, K, i, T, sigma))
         rhos.append(optionRho(S, K, i, T, sigma, type))
 
-fig, ax = plt.subplots(2,3, figsize=(24,12))
+fig1, ax1 = plt.subplots(figsize=(24,12))
+ax1.plot(variable, prices)
+ax1.set_title("Option Price")
 
-ax[0, 0].plot(variable, prices)
-ax[0, 0].set_title("Option Price")
+fig2, ax2 = plt.subplots(figsize=(24,12))
+ax2.plot(variable, deltas)
+ax2.set_title("Delta")
 
-ax[0, 1].plot(variable, deltas)
-ax[0, 1].set_title("Delta")
+fig3, ax3 = plt.subplots(figsize=(24,12))
+ax3.plot(variable, gammas)
+ax3.set_title("Gamma")
 
-ax[0, 2].plot(variable, gammas)
-ax[0, 2].set_title("Gamma")
+fig4, ax4 = plt.subplots(figsize=(24,12))
+ax4.plot(variable, thetas)
+ax4.set_title("Theta")
 
-ax[1, 0].plot(variable, thetas)
-ax[1, 0].set_title("Theta")
+fig5, ax5 = plt.subplots(figsize=(24,12))
+ax5.plot(variable, vegas)
+ax5.set_title("Vega")
 
-ax[1, 1].plot(variable, vegas)
-ax[1, 1].set_title("Vega")
-
-ax[1, 2].plot(variable, rhos)
-ax[1, 2].set_title("Rho")
+fig6, ax6 = plt.subplots(figsize=(24,12))
+ax6.plot(variable, rhos)
+ax6.set_title("Rho")
 
 if variable==days_array:
-    ax[0,0].invert_xaxis()
-    ax[0,1].invert_xaxis()
-    ax[0,2].invert_xaxis()
-    ax[1,0].invert_xaxis()
-    ax[1,1].invert_xaxis()
-    ax[1,2].invert_xaxis()
+    ax1.invert_xaxis()
+    ax2.invert_xaxis()
+    ax3.invert_xaxis()
+    ax4.invert_xaxis()
+    ax5.invert_xaxis()
+    ax6.invert_xaxis()
 
 
 
 if run_button:
-    st.pyplot(fig)
+    st.pyplot(fig1)
+    st.pyplot(fig2)
+    st.pyplot(fig3)
+    st.pyplot(fig4)
+    st.pyplot(fig5)
+    st.pyplot(fig6)

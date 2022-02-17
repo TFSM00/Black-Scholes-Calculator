@@ -99,7 +99,7 @@ def optionRho(S, K, r, T, sigma, type="c"):
 
 
 
-st.set_page_config(page_title="Black-Scholes", layout="wide")
+st.set_page_config(page_title="Black-Scholes")
 
 sidebar_title = st.sidebar.header("Black-Scholes Visualization")
 author = st.sidebar.write("Made by Tiago Moreira")

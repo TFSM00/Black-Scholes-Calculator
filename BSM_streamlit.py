@@ -172,27 +172,27 @@ elif variable == risk_free_var:
         vegas.append(optionVega(S, K, i, T, sigma))
         rhos.append(optionRho(S, K, i, T, sigma, type))
 
-fig1, ax1 = plt.subplots(figsize=(24,12))
+fig1, ax1 = plt.subplots()
 ax1.plot(variable, prices)
 ax1.set_title("Option Price")
 
-fig2, ax2 = plt.subplots(figsize=(24,12))
+fig2, ax2 = plt.subplots()
 ax2.plot(variable, deltas)
 ax2.set_title("Delta")
 
-fig3, ax3 = plt.subplots(figsize=(24,12))
+fig3, ax3 = plt.subplots()
 ax3.plot(variable, gammas)
 ax3.set_title("Gamma")
 
-fig4, ax4 = plt.subplots(figsize=(24,12))
+fig4, ax4 = plt.subplots()
 ax4.plot(variable, thetas)
 ax4.set_title("Theta")
 
-fig5, ax5 = plt.subplots(figsize=(24,12))
+fig5, ax5 = plt.subplots()
 ax5.plot(variable, vegas)
 ax5.set_title("Vega")
 
-fig6, ax6 = plt.subplots(figsize=(24,12))
+fig6, ax6 = plt.subplots()
 ax6.plot(variable, rhos)
 ax6.set_title("Rho")
 

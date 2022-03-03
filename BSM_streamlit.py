@@ -76,9 +76,9 @@ def optionRho(S, K, r, T, sigma, type="c"):
 
 
 
-st.set_page_config(page_title="Black-Scholes")
+st.set_page_config(page_title="Black-Scholes-Merton Model")
 
-sidebar_title = st.sidebar.header("Black-Scholes Visualization")
+sidebar_title = st.sidebar.header("Black-Scholes-Merton Visualization")
 author = st.sidebar.write("Made by Tiago Moreira")
 space = st.sidebar.header("")
 r = st.sidebar.number_input("Risk-Free Rate", min_value=0.000, max_value=1.000, step=0.001, value=0.030)

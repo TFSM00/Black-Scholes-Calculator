@@ -96,87 +96,12 @@ def optionRho(S, K, r, T, sigma, type="c"):
         print("Please confirm all option parameters!")
 
 print("Option Price: ", blackScholes(S, K, r, T, sigma, type="c"))
-# print("Option Delta: ", optionDelta(S, K, r, T, sigma, type="c"))
-# print("Option Gamma: ", optionGamma(S, K, r, T, sigma))
-# print("Option Theta: ", optionTheta(S, K, r, T, sigma, type="c"))
-# print("Option Vega: ", optionVega(S, K, r, T, sigma))
-# print("Option Rho: ", optionRho(S, K, r, T, sigma, type="c"))
 
-# days_array = [i for i in range(1, days_to_expiry + 1)]
-# days_array.sort(reverse=True)
-# underlying_price_var = [i for i in range(1, 101)]
-# strike_var = [i for i in range(1, 101)]
-# risk_free_var = np.linspace(0.0001, 0.25, 100)
+days_array = [i for i in range(1, days_to_expiry + 1)]
 
+blacks = [blackScholes(S, K, r, i, sigma, type) for i in days_array]
 
-# variable = days_array
+plt.plot(blacks, days_array)
+plt.gca().invert_xaxis()
+plt.show()
 
-# prices = []
-# deltas = []
-# gammas = []
-# thetas = []
-# vegas = []
-# rhos = []
-
-# if variable == days_array:
-#     for i in variable:
-#         prices.append(blackScholes(S, K, r, i, sigma, type))
-#         deltas.append(optionDelta(S, K, r, i, sigma, type))
-#         gammas.append(optionGamma(S, K, r, i, sigma))
-#         thetas.append(optionTheta(S,K, r, i, sigma, type))
-#         vegas.append(optionVega(S, K, r, i, sigma))
-#         rhos.append(optionRho(S, K, r, i, sigma, type))
-# elif variable == underlying_price_var:
-#     for i in variable:
-#         prices.append(blackScholes(i, K, r, T, sigma, type))
-#         deltas.append(optionDelta(i, K, r, T, sigma, type))
-#         gammas.append(optionGamma(i, K, r, T, sigma))
-#         thetas.append(optionTheta(i,K, r, T, sigma, type))
-#         vegas.append(optionVega(i, K, r, T, sigma))
-#         rhos.append(optionRho(i, K, r, T, sigma, type))
-# elif variable == strike_var:
-#     for i in variable:
-#         prices.append(blackScholes(S, i, r, T, sigma, type))
-#         deltas.append(optionDelta(S, i, r, T, sigma, type))
-#         gammas.append(optionGamma(S, i, r, T, sigma))
-#         thetas.append(optionTheta(S,i, r, T, sigma, type))
-#         vegas.append(optionVega(S, i, r, T, sigma))
-#         rhos.append(optionRho(S, i, r, T, sigma, type))
-# elif variable == risk_free_var:
-#     for i in variable:
-#         prices.append(blackScholes(S, K, i, T, sigma, type))
-#         deltas.append(optionDelta(S, K, i, T, sigma, type))
-#         gammas.append(optionGamma(S, K, i, T, sigma))
-#         thetas.append(optionTheta(S,K, i, T, sigma, type))
-#         vegas.append(optionVega(S, K, i, T, sigma))
-#         rhos.append(optionRho(S, K, i, T, sigma, type))
-
-# fig, ax = plt.subplots(2,3, figsize=(24,12))
-
-# ax[0, 0].plot(variable, prices)
-# ax[0, 0].set_title("Prices")
-
-# ax[0, 1].plot(variable, deltas)
-# ax[0, 1].set_title("Deltas")
-
-# ax[0, 2].plot(variable, gammas)
-# ax[0, 2].set_title("Gammas")
-
-# ax[1, 0].plot(variable, thetas)
-# ax[1, 0].set_title("Thetas")
-
-# ax[1, 1].plot(variable, vegas)
-# ax[1, 1].set_title("Vegas")
-
-# ax[1, 2].plot(variable, rhos)
-# ax[1, 2].set_title("Rhos")
-
-# if variable==days_array:
-#     ax[0,0].invert_xaxis()
-#     ax[0,1].invert_xaxis()
-#     ax[0,2].invert_xaxis()
-#     ax[1,0].invert_xaxis()
-#     ax[1,1].invert_xaxis()
-#     ax[1,2].invert_xaxis()
-
-# plt.show()

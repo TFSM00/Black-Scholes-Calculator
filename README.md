@@ -10,16 +10,12 @@
     <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg">
 </p>
 
-
-## Disclaimer: This is a work in progress as I am still figuring out how to visually present it better
-
 ### Project Description
-Visualization of Option Price and Greeks on European Options using the Black-Scholes-Merton Option Pricing Model
 
+This project is a Black-Scholes Options Pricing Calculator for European Options including graphical visualization of the Option Greeks.
 It is a web-hosted interactive application, hosted using [Streamlit's](streamlit.io) Sharing functionality.
 
-
-[Link to the Project](https://share.streamlit.io/tfsm00/black-scholes-merton-model/main/BSM_streamlit.py)
+The project can be found here: [Link to Project](https://share.streamlit.io/tfsm00/black-scholes-merton-model/main/BSM_streamlit.py)
 
 ### Black-Scholes Model
 

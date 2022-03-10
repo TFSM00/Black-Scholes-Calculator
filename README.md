@@ -4,7 +4,7 @@
     <a href="https://share.streamlit.io/tfsm00/black-scholes-merton-model/main/BSM_streamlit.py">
         <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg">
     </a>
-    <a href="https://github.com/TFSM00/Black-Scholes-Merton-Model/main/LICENSE.txt">
+    <a href="https://github.com/TFSM00/Black-Scholes-Merton-Model/blob/main/LICENSE.txt">
         <img src="https://img.shields.io/github/license/TFSM00/Black-Scholes-Merton-Model">
     </a>
     <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg">

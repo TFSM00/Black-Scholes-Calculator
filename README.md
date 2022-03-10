@@ -1,11 +1,11 @@
 <h1 align="center">Black-Scholes Options Pricing Calculator</h1>
 
 <p align="center">
-    <a href="https://share.streamlit.io/tfsm00/black-scholes-merton-model/main/BSM_streamlit.py">
+    <a href="https://share.streamlit.io/tfsm00/black-scholes-calculator/main/BSM_streamlit.py">
         <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg">
     </a>
-    <a href="https://github.com/TFSM00/Black-Scholes-Merton-Model/blob/main/LICENSE.txt">
-       <img alt="GitHub" src="https://img.shields.io/github/license/tfsm00/Black-Scholes-Merton-Model">
+    <a href="https://github.com/TFSM00/Black-Scholes-Calculator/blob/main/LICENSE.txt">
+       <img alt="GitHub" src="https://img.shields.io/github/license/tfsm00/Black-Scholes-Calculator">
     </a>
     <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg">
 </p>
@@ -16,7 +16,7 @@
 This project is a Black-Scholes Options Pricing Calculator for European Options including graphical visualization of the Option Greeks.
 It is a web-hosted interactive application, hosted using [Streamlit's](streamlit.io) Sharing functionality.
 
-The project can be found here: [Link to Project](https://share.streamlit.io/tfsm00/black-scholes-merton-model/main/BSM_streamlit.py)
+The project can be found here: [Link to Project](https://share.streamlit.io/tfsm00/black-scholes-calculator/main/BSM_streamlit.py)
 
 ## Black-Scholes Model
 
@@ -70,10 +70,10 @@ Formula Images: [Macroption](https://www.macroption.com/black-scholes-formula/)
 ## Issues and Suggestions
 
 
-If you encounter an error in the program, a way to make code faster, any wrong application of financial formulas and concepts or just want to make a suggestion on how to make this project better raise a new issue [here](https://github.com/TFSM00/Black-Scholes-Merton-Model/issues/new/choose). 
+If you encounter an error in the program, a way to make code faster, any wrong application of financial formulas and concepts or just want to make a suggestion on how to make this project better raise a new issue [here](https://github.com/TFSM00/Black-Scholes-Calculator/issues/new/choose). 
 
 ## 📝 Licence
 
 
 Copyright © 2022 [Tiago Moreira](https://github.com/TFSM00).<br />
-This project is [MIT](https://github.com/TFSM00/Black-Scholes-Merton-Model/blob/main/LICENSE.txt) licensed.
+This project is [MIT](https://github.com/TFSM00/Black-Scholes-Calculator/blob/main/LICENSE.txt) licensed.

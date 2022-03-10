@@ -3,7 +3,7 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
-
+import streamlit.components.v1 as components
 
 def blackScholes(S, K, r, T, sigma, type="c"):
     "Calculate Black Scholes option price for a call/put"
@@ -91,13 +91,12 @@ def optionRho(S, K, r, T, sigma, type="c"):
 
 st.set_page_config(page_title="Black-Scholes-Merton Model")
 
-sidebar_title = st.sidebar.header("Black-Scholes-Merton Visualization")
-author = st.sidebar.write("Made by Tiago Moreira")
+sidebar_title = st.sidebar.header("Black-Scholes Parameters")
 space = st.sidebar.header("")
 r = st.sidebar.number_input("Risk-Free Rate", min_value=0.000, max_value=1.000, step=0.001, value=0.030)
 S = st.sidebar.number_input("Underlying Asset Price", min_value=1.00, step=0.10, value=30.00)
 K = st.sidebar.number_input("Strike Price", min_value=1.00, step=0.10, value=50.00)
-days_to_expiry = st.sidebar.number_input("Days left until Expiry Date", min_value=1, step=1, value=250)
+days_to_expiry = st.sidebar.number_input("Time to Expiry Date (in days)", min_value=1, step=1, value=250)
 sigma = st.sidebar.number_input("Volatility", min_value=0.000, max_value=1.000, step=0.01, value=0.30)
 type_input = st.sidebar.selectbox("Option Type",["Call", "Put"])
 
@@ -109,9 +108,6 @@ elif type_input=="Put":
 
 T = days_to_expiry/365
 
-
-
-run_button = st.sidebar.button("Run calculations")
 
 spot_prices = [i for i in range(0, int(S)+50 + 1)]
 
@@ -168,7 +164,14 @@ fig5.tight_layout()
 fig6.tight_layout()
 
 
-
+st.markdown("<h2 align='center'>Black-Scholes Option Price Calculator</h2>", unsafe_allow_html=True)
+st.markdown("<h5 align='center'>Made by Tiago Moreira</h5>", unsafe_allow_html=True)
+st.header("")
+st.markdown("<h6>See project's description and assumptions here: <a href='https://github.com/TFSM00/Black-Scholes-Merton-Model'>https://github.com/TFSM00/Black-Scholes-Merton-Model</a></h6>", unsafe_allow_html=True)
+st.markdown("<h6>See all my other projects here: <a href='https://github.com/TFSM00'>https://github.com/TFSM00</a></h6>", unsafe_allow_html=True)
+st.header("")
+st.markdown("<h3 align='center'>Option Prices and Greeks</h3>", unsafe_allow_html=True)
+st.header("")
 col1, col2, col3, col4, col5 = st.columns(5)
 col2.metric("Call Price", str(round(blackScholes(S, K, r, T, sigma,type="c"), 3)))
 col4.metric("Put Price", str(round(blackScholes(S, K, r, T, sigma,type="p"), 3)))
@@ -180,6 +183,9 @@ bcol3.metric("Theta", str(round(optionTheta(S, K, r, T, sigma,type="c"), 3)))
 bcol4.metric("Vega", str(round(optionVega(S, K, r, T, sigma), 3)))
 bcol5.metric("Rho", str(round(optionRho(S, K, r, T, sigma,type="c"), 3)))
 
+st.header("")
+st.markdown("<h3 align='center'>Visualization of the Greeks</h3>", unsafe_allow_html=True)
+st.header("")
 st.pyplot(fig1)
 st.pyplot(fig2)
 st.pyplot(fig3)

@@ -2,10 +2,13 @@ import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 import streamlit as st
+import seaborn as sns
 
 
 def blackScholes(S, K, r, T, sigma, type="c"):
     "Calculate Black Scholes option price for a call/put"
+    d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
 
     try:
         if type == "c":
@@ -20,7 +23,9 @@ def blackScholes(S, K, r, T, sigma, type="c"):
 
 def optionDelta (S, K, r, T, sigma, type="c"):
     "Calculates option delta"
-
+    d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+    
     try:
         if type == "c":
             delta = norm.cdf(d1, 0, 1)
@@ -33,6 +38,8 @@ def optionDelta (S, K, r, T, sigma, type="c"):
 
 def optionGamma (S, K, r, T, sigma):
     "Calculates option gamma"
+    d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
     
     try:
         gamma = norm.pdf(d1, 0, 1)/ (S * sigma * np.sqrt(T))
@@ -42,19 +49,23 @@ def optionGamma (S, K, r, T, sigma):
 
 def optionTheta(S, K, r, T, sigma, type="c"):
     "Calculates option theta"
-
+    d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+    
     try:
         if type == "c":
-            theta = -S * (norm.pdf(d1, 0, 1) * sigma / (2 * np.sqrt(T))) - r * K * np.exp(-r*T) * norm.cdf(d2, 0, 1)
+            theta = - ((S * norm.pdf(d1, 0, 1) * sigma) / (2 * np.sqrt(T))) - r * K * np.exp(-r*T) * norm.cdf(d2, 0, 1)
 
         elif type == "p":
-            theta = -S * (norm.pdf(d1, 0, 1) * sigma / (2 * np.sqrt(T))) + r * K * np.exp(-r*T) * norm.cdf(-d2, 0, 1)
+            theta = - ((S * norm.pdf(d1, 0, 1) * sigma) / (2 * np.sqrt(T))) + r * K * np.exp(-r*T) * norm.cdf(-d2, 0, 1)
         return theta/365
     except:
         st.sidebar.error("Please confirm all option parameters!")
 
 def optionVega (S, K, r, T, sigma):
     "Calculates option vega"
+    d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
     
     try:
         vega = S * np.sqrt(T) * norm.pdf(d1, 0, 1) * 0.01
@@ -64,7 +75,9 @@ def optionVega (S, K, r, T, sigma):
 
 def optionRho(S, K, r, T, sigma, type="c"):
     "Calculates option rho"
-
+    d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+    
     try:
         if type == "c":
             rho = 0.01 * K * T * np.exp(-r*T) * norm.cdf(d2, 0, 1)
@@ -96,56 +109,80 @@ elif type_input=="Put":
 
 T = days_to_expiry/365
 
-d1 = (np.log(S/K) + (r + sigma**2/2)* T)/(sigma*np.sqrt(T))
-d2 = d1 - sigma * np.sqrt(T)
+
 
 run_button = st.sidebar.button("Run calculations")
 
-days_array = [i for i in range(1, days_to_expiry + 1)]
-days_array.sort(reverse=True)
+spot_prices = [i for i in range(0, int(S)+50 + 1)]
 
-prices = [blackScholes(S, K, r, i, sigma, type) for i in days_array]
-deltas = [optionDelta(S, K, r, i, sigma, type) for i in days_array]
-gammas = [optionGamma(S, K, r, i, sigma) for i in days_array]
-thetas = [optionTheta(S, K, r, i, sigma, type) for i in days_array]
-vegas = [optionVega(S, K, r, i, sigma) for i in days_array]
-rhos = [optionRho(S, K, r, i, sigma, type) for i in days_array]
+prices = [blackScholes(i, K, r, T, sigma, type) for i in spot_prices]
+deltas = [optionDelta(i, K, r, T, sigma, type) for i in spot_prices]
+gammas = [optionGamma(i, K, r, T, sigma) for i in spot_prices]
+thetas = [optionTheta(i, K, r, T, sigma, type) for i in spot_prices]
+vegas = [optionVega(i, K, r, T, sigma) for i in spot_prices]
+rhos = [optionRho(i, K, r, T, sigma, type) for i in spot_prices]
+
+sns.set_style("whitegrid")
 
 fig1, ax1 = plt.subplots()
-ax1.plot(days_array, prices)
-ax1.invert_xaxis()
+sns.lineplot(spot_prices, prices)
+ax1.set_ylabel('Option Price')
+ax1.set_xlabel("Underlying Asset Price")
 ax1.set_title("Option Price")
 
 fig2, ax2 = plt.subplots()
-ax2.plot(days_array, deltas)
-ax2.invert_xaxis()
+sns.lineplot(spot_prices, deltas)
+ax2.set_ylabel('Delta')
+ax2.set_xlabel("Underlying Asset Price")
 ax2.set_title("Delta")
 
 fig3, ax3 = plt.subplots()
-ax3.plot(days_array, gammas)
-ax3.invert_xaxis()
+sns.lineplot(spot_prices, gammas)
+ax3.set_ylabel('Gamma')
+ax3.set_xlabel("Underlying Asset Price")
 ax3.set_title("Gamma")
 
 fig4, ax4 = plt.subplots()
-ax4.plot(days_array, thetas)
-ax4.invert_xaxis()
+sns.lineplot(spot_prices, thetas)
+ax4.set_ylabel('Theta')
+ax4.set_xlabel("Underlying Asset Price")
 ax4.set_title("Theta")
 
 fig5, ax5 = plt.subplots()
-ax5.plot(days_array, vegas)
-ax5.invert_xaxis()
+sns.lineplot(spot_prices, vegas)
+ax5.set_ylabel('Vega')
+ax5.set_xlabel("Underlying Asset Price")
 ax5.set_title("Vega")
 
 fig6, ax6 = plt.subplots()
-ax6.plot(days_array, rhos)
-ax6.invert_xaxis()
+sns.lineplot(spot_prices, rhos)
+ax6.set_ylabel('Rho')
+ax6.set_xlabel("Underlying Asset Price")
 ax6.set_title("Rho")
 
+fig1.tight_layout()
+fig2.tight_layout()
+fig3.tight_layout()
+fig4.tight_layout()
+fig5.tight_layout()
+fig6.tight_layout()
 
-if run_button:
-    st.pyplot(fig1)
-    st.pyplot(fig2)
-    st.pyplot(fig3)
-    st.pyplot(fig4)
-    st.pyplot(fig5)
-    st.pyplot(fig6)
+
+
+col1, col2, col3, col4, col5 = st.columns(5)
+col2.metric("Call Price", str(round(blackScholes(S, K, r, T, sigma,type="c"), 3)))
+col4.metric("Put Price", str(round(blackScholes(S, K, r, T, sigma,type="p"), 3)))
+
+bcol1, bcol2, bcol3, bcol4, bcol5 = st.columns(5)
+bcol1.metric("Delta", str(round(blackScholes(S, K, r, T, sigma,type="c"), 3)))
+bcol2.metric("Gamma", str(round(optionGamma(S, K, r, T, sigma), 3)))
+bcol3.metric("Theta", str(round(optionTheta(S, K, r, T, sigma,type="c"), 3)))
+bcol4.metric("Vega", str(round(optionVega(S, K, r, T, sigma), 3)))
+bcol5.metric("Rho", str(round(optionRho(S, K, r, T, sigma,type="c"), 3)))
+
+st.pyplot(fig1)
+st.pyplot(fig2)
+st.pyplot(fig3)
+st.pyplot(fig4)
+st.pyplot(fig5)
+st.pyplot(fig6)

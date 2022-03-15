@@ -1,0 +1,1 @@
+web: sh setup.sh && streamlit run BSM_streamlit.py

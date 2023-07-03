@@ -1,7 +1,7 @@
 <h1 align="center">Black-Scholes Options Pricing Calculator</h1>
 
 <p align="center">
-    <a href="https://share.streamlit.io/tfsm00/black-scholes-calculator/main/BSM_streamlit.py">
+    <a href="https://tfsm00-black-scholes-calculator-bsm-streamlit-rm6hsi.streamlit.app/">
         <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg">
     </a>
     <a href="https://github.com/TFSM00/Black-Scholes-Calculator/blob/main/LICENSE.txt">
